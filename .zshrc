@@ -1,13 +1,6 @@
 if [ "$TMUX" = "" ]; then tmux; fi
 if [[ $TERM == xterm ]]; then TERM=xterm-256color; fi
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -18,8 +11,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
-POWERLEVEL9K_MODE="nerdfont-complete"
+ZSH_THEME="fino-time"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -82,49 +74,35 @@ POWERLEVEL9K_MODE="nerdfont-complete"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-
-
 ZSH_CUSTOM=/usr/share/zsh
 
-
 plugins=(
-	git
+    git
 	zsh-autosuggestions
-	copyfile
-	dirhistory
-	copypath
-	safe-paste
+    copyfile
+    dirhistory
+    docker
+    copypath
+    safe-paste
 	fast-syntax-highlighting
-	extract
-	vi-mode
+    extract
+    vi-mode
 )
-
-alias cls="colorls"
-
-#if [ -x "$(command -v colorls)" ]; then
-#    alias ls="colorls"
-#    alias la="colorls -al"
-#fi
-
-
-#bindkey "^V" paste
-# bindkey -v
-
 
 source $ZSH/oh-my-zsh.sh
 
+
 export EDITOR=nvim
-
 export GOPATH=$HOME/go
-
 export JAVA_HOME=/usr/lib/jvm/java-17-jetbrains
+
+export PATH=$PATH:$GOPATH/bin
 
 alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=2000
-
 
 # User configuration
 
@@ -151,30 +129,3 @@ SAVEHIST=2000
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-PATH="/home/vyacheslav/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/vyacheslav/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/vyacheslav/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/vyacheslav/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/vyacheslav/perl5"; export PERL_MM_OPT;
-
-#export TERM=rxvt-256colors
-
-PATH="$PATH":"/opt/flutter/bin"; export PATH;
-
-
-
-if [ -n "$GTK_MODULES" ]; then
-    GTK_MODULES="${GTK_MODULES}:appmenu-gtk-module" # unity-gtk-module
-    #GTK_MODULES="${GTK_MODULES}:unity-gtk-module" # unity-gtk-module
-else
-    GTK_MODULES="appmenu-gtk-module"
-    #GTK_MODULES="unity-gtk-module"
-fi
-
-if [ -z "$UBUNTU_MENUPROXY" ]; then
-    UBUNTU_MENUPROXY=1
-fi
