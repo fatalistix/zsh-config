@@ -75,13 +75,13 @@ ZSH_CUSTOM=/usr/share/zsh
 
 plugins=(
     git
-	zsh-autosuggestions
+    zsh-autosuggestions
     copyfile
     dirhistory
     docker
     copypath
     safe-paste
-	fast-syntax-highlighting
+    fast-syntax-highlighting
     extract
     vi-mode
 )
