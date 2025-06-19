@@ -1,21 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="fino-time"
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -54,6 +39,10 @@ ZSH_THEME="fino-time"
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
+setup_antigen() {
+    antidote load $ZSH_CONFIG_DIR/.zsh_plugins.txt
+}
+
 setup_ranger() {
 	alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 }
@@ -64,63 +53,27 @@ setup_history() {
 	SAVEHIST=2000
 }
 
-setup_omz() {
-	source $ZSH/oh-my-zsh.sh
-}
-
 setup_darwin() {
-	plugins=(
-		git
-		copyfile
-		dirhistory
-		docker
-		copypath
-		safe-paste
-		extract
-		vi-mode
-	)
-
+    source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
 
 	export EDITOR=nvim
-	
-	setup_omz
+
+	setup_antigen
 	setup_ranger
 	setup_history
-
-	source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-	source /opt/homebrew/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 }
 
 setup_linux() {
-	ZSH_CUSTOM="/usr/share/zsh"
-	plugins=(
-		git
-		copyfile
-		dirhistory
-		docker
-		copypath
-		safe-paste
-		extract
-		vi-mode
-		zsh-autosuggestions
-		fast-syntax-highlighting
-	)
-	
-
-
 	export EDITOR=nvim
-	export GOPATH=$HOME/go
-	export JAVA_HOME=/usr/lib/jvm/java-17-jetbrains
-	export PATH=$PATH:$GOPATH/bin
-	
-	setup_omz
+
+	setup_antigen
 	setup_ranger
 	setup_history
 }
 
 OS=$(uname -s)
 
-if [ "$OS" = "Darwin" ]; then 
+if [ "$OS" = "Darwin" ]; then
 	setup_darwin
 elif [ "$OS" = "Linux" ]; then
 	setup_linux
