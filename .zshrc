@@ -54,7 +54,7 @@ setup_history() {
 }
 
 setup_darwin() {
-    source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
+	source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
 
 	export EDITOR=nvim
 
@@ -64,6 +64,8 @@ setup_darwin() {
 }
 
 setup_linux() {
+	source ~/.antidote/antidote.zsh
+
 	export EDITOR=nvim
 
 	setup_antigen
