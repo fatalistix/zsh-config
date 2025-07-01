@@ -74,7 +74,18 @@ setup_darwin() {
 }
 
 setup_linux() {
-	source ~/.antidote/antidote.zsh
+	
+	antidote_yay=/usr/share/zsh-antidote/antidote.zsh
+	antidote_home=~/.antidote/antidote.zsh
+
+	if [ -e $antidote_yay ]; then
+		source $antidote_yay
+	elif [ -e $antidote_home ]; then
+		source $antidote_home
+	else
+		echo "Unable to find antidote"
+		exit 125
+	fi
 
 	export EDITOR=nvim
 
