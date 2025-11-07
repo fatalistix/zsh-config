@@ -53,6 +53,10 @@ setup_history() {
 	SAVEHIST=2000
 }
 
+setup_darwin_rustup() {
+    export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
+}
+
 setup_darwin() {
     source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
 
@@ -61,6 +65,7 @@ setup_darwin() {
 	setup_antigen
 	setup_ranger
 	setup_history
+    setup_darwin_rustup
 }
 
 setup_linux() {
