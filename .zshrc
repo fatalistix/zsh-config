@@ -58,7 +58,17 @@ setup_darwin_rustup() {
 }
 
 setup_darwin() {
-    source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
+	antidote_homebrew=/opt/homebrew/opt/antidote/share/antidote/antidote.zsh
+	antidote_home=~/.antidote/antidote.zsh
+
+	if [ -e $antidote_homebrew ]; then
+		source $antidote_homebrew
+	elif [ -e $antidote_home ]; then
+		source $antidote_home
+	else
+		echo "Unable to find antidote"
+		exit 125
+	fi
 
 	export EDITOR=nvim
 
@@ -69,6 +79,19 @@ setup_darwin() {
 }
 
 setup_linux() {
+	
+	antidote_yay=/usr/share/zsh-antidote/antidote.zsh
+	antidote_home=~/.antidote/antidote.zsh
+
+	if [ -e $antidote_yay ]; then
+		source $antidote_yay
+	elif [ -e $antidote_home ]; then
+		source $antidote_home
+	else
+		echo "Unable to find antidote"
+		exit 125
+	fi
+
 	export EDITOR=nvim
 
 	setup_antigen
